@@ -19,7 +19,10 @@ class Directory extends Component {
     API.getRandomPeople()
       .then((res) => {
         //console.log(res.data.results);
-        this.setState({ people: res.data.results });
+        this.setState({
+          people: res.data.results,
+          filterpeople: res.data.results,
+        });
       })
       .catch((err) => console.log(err));
   }
@@ -29,43 +32,65 @@ class Directory extends Component {
     //console.log(this.state.people);
     switch (event.target.text) {
       case "First Name":
-          this.setState({people: this.state.people.sort((a, b) => a.name.first > b.name.first ? this.state.fn : -this.state.fn)})
-          this.setState({fn: -this.state.fn});
+        this.setState({
+          filterpeople: this.state.filterpeople.sort((a, b) =>
+            a.name.first > b.name.first ? this.state.fn : -this.state.fn
+          ),
+        });
+        this.setState({ fn: -this.state.fn });
         break;
       case "Last Name":
-        this.setState({people: this.state.people.sort((a, b) => a.name.last > b.name.last ? this.state.ln : -this.state.ln)})
-        this.setState({ln: -this.state.ln});
+        this.setState({
+          filterpeople: this.state.filterpeople.sort((a, b) =>
+            a.name.last > b.name.last ? this.state.ln : -this.state.ln
+          ),
+        });
+        this.setState({ ln: -this.state.ln });
         break;
       case "Email":
-        this.setState({people: this.state.people.sort((a, b) => a.email > b.email ? this.state.em : -this.state.em)})
-        this.setState({em: -this.state.em});
+        this.setState({
+          filterpeople: this.state.filterpeople.sort((a, b) =>
+            a.email > b.email ? this.state.em : -this.state.em
+          ),
+        });
+        this.setState({ em: -this.state.em });
         break;
       case "Location":
-        this.setState({people: this.state.people.sort((a, b) => a.location.city > b.location.city ? this.state.lo : -this.state.lo)})
-        this.setState({lo: -this.state.lo});
+        this.setState({
+          filterpeople: this.state.filterpeople.sort((a, b) =>
+            a.location.city > b.location.city ? this.state.lo : -this.state.lo
+          ),
+        });
+        this.setState({ lo: -this.state.lo });
         break;
       case "Age":
-        this.setState({people: this.state.people.sort((a, b) => a.dob.age > b.dob.age ? this.state.ag : -this.state.ag)})
-        this.setState({ag: -this.state.ag});
+        this.setState({
+          filterpeople: this.state.filterpeople.sort((a, b) =>
+            a.dob.age > b.dob.age ? this.state.ag : -this.state.ag
+          ),
+        });
+        this.setState({ ag: -this.state.ag });
         break;
     }
-  }
-handleFilterBy = (event) => {
-console.log(event.target.value);
-this.setState({people: this.state.people.filter(function (person) {
-    return person.name.first.includes(event.target.value, 0);
-})});
-}
+  };
+  handleFilterBy = (event) => {
+    console.log(event.target.value);
+    this.setState({
+      filterpeople: this.state.people.filter(function (person) {
+        return person.name.first.includes(event.target.value, 0);
+      }),
+    });
+  };
   render() {
     return (
       <div className="container">
         <Navbar />
         <Searchbar
-        handleFilterBy={this.handleFilterBy}
-        sortby = {this.state.sortby}
+          handleFilterBy={this.handleFilterBy}
+          sortby={this.state.sortby}
         />
         <Table
-          people={this.state.people}
+          people={this.state.filterpeople}
           handleRowClick={this.handleRowClick}
         />
       </div>

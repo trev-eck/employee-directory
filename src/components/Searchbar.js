@@ -4,7 +4,7 @@ export default function Searchbar(props) {
     return (
         <form className="search">
         <div className="form-group">
-          <label htmlFor="filter">Filter Employees:</label>
+          <label htmlFor="filter">Filter Employees by First Name:</label>
           <input
             value={props.search}
             onChange={props.handleFilterBy}
@@ -12,7 +12,7 @@ export default function Searchbar(props) {
             list="cats"
             type="text"
             className="form-control"
-            placeholder="By Name"
+            placeholder="Case Sensitive"
             id="filter"
           />
           <datalist id="filter">
