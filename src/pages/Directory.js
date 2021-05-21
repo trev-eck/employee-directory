@@ -5,6 +5,7 @@ import Searchbar from "../components/Searchbar";
 import API from "../utils/API";
 
 class Directory extends Component {
+  //state values, we will fill the people array on page load and use the filter array for the filter input, purpose of the other variables is to switch between ascending and descending sort
   state = {
     people: [],
     filterpeople: [],
@@ -15,10 +16,10 @@ class Directory extends Component {
     lo: 1,
     ag: 1,
   };
+  //when the page loads populate both of our arrays with random people data
   componentDidMount() {
     API.getRandomPeople()
       .then((res) => {
-        //console.log(res.data.results);
         this.setState({
           people: res.data.results,
           filterpeople: res.data.results,
@@ -26,10 +27,9 @@ class Directory extends Component {
       })
       .catch((err) => console.log(err));
   }
+  //when user clicks on table row head, sort the table by that category
   handleRowClick = (event) => {
     event.preventDefault();
-    //console.log(event.target.text);
-    //console.log(this.state.people);
     switch (event.target.text) {
       case "First Name":
         this.setState({
@@ -73,14 +73,16 @@ class Directory extends Component {
         break;
     }
   };
+  //when the user enters text into the filter form, update the table with only matching names
   handleFilterBy = (event) => {
-    console.log(event.target.value);
     this.setState({
       filterpeople: this.state.people.filter(function (person) {
         return person.name.first.includes(event.target.value, 0);
       }),
     });
   };
+
+//Generate the navbar, the searchbar, and table, passing them all the data and functions they need
   render() {
     return (
       <div className="container">

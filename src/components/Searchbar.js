@@ -2,6 +2,7 @@ import React from 'react'
 
 export default function Searchbar(props) {
     return (
+      // Generates the search/filter form, when the form changes update our table data
         <form className="search">
         <div className="form-group">
           <label htmlFor="filter">Filter Employees by First Name:</label>
@@ -15,9 +16,6 @@ export default function Searchbar(props) {
             placeholder="Case Sensitive"
             id="filter"
           />
-          <datalist id="filter">
-              <option value="First Name" key="First Name" />
-          </datalist>
         </div>
       </form>
     )

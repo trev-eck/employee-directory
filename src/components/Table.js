@@ -6,6 +6,7 @@ export default function Table(props) {
             <table className="table">
                 <thead>
                     <tr>
+                        {/* Creates our Table Column Heads as links that the user can click on to sort */}
                         <th scope="col"></th>
                         <th scope="col">Picture</th>
                         <th scope="col"><a href="/" onClick={props.handleRowClick}>First Name</a></th>
@@ -16,6 +17,7 @@ export default function Table(props) {
                     </tr>
                 </thead>
                 <tbody>
+                    {/* populate our table with all of the information we gathered from the Random People API */}
                     {props.people.map(person => (
                         <tr>
                             <th scope="row"></th>
